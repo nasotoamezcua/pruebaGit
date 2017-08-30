@@ -17,20 +17,18 @@ public class KidsCalculatorTest {
 	private DecimalFormat df = new DecimalFormat("#.00##");
 
 	@Test
-	public void kidsCalculatorTest(){
+	public void kidsCalculatorTest() {
 		log.info("kidsCalculatorTest -------------------");
-		
+
 		// Implementar
-		
 		ISimpleCalculator simple = new SimpleCalculator();
 		IKidsCalculator kids = new KidsCalculator();
-		
-		final double expectedValue  = 16D;
-		final double result  = kids.set(5).add(5).add(5).add(5).substract(4).result();
-		
+
+		final double expectedValue = 12D;
+
+		final double result = kids.set(5).add(5).add(5).add(-5).substract(4).result();
+
 		Assert.assertEquals(expectedValue, result, 0.0001);
-		
-		
 	}
-	
+
 }
