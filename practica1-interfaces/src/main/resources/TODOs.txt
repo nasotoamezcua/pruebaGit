@@ -1,23 +1,23 @@
 TODO 1.
 En paquete org.certificatic.practica1.interfaces.livingbeing.api
-Crear Interface IBugEater
-Crear Interface ILivingBeing
+Crear Interface IBugEater ok
+Crear Interface ILivingBeing ok
 
 
 TODO 2.
-Clase Animal definir como abstracta e implementar ILivingBeing
+Clase Animal definir como abstracta e implementar ILivingBeing ok
 
 
 TODO 3.
-Clase Plant definir como abstracta e implementar ILivingBeing 
+Clase Plant definir como abstracta e implementar ILivingBeing ok 
 
 
 TODO 4.
-Clase Aardvark heredar de Animal e implementar IBugEater
+Clase Aardvark heredar de Animal e implementar IBugEater ok
 
 
 TODO 5.
-Clase VenusFlyTrap heredar de Plant e implementar IBugEater
+Clase VenusFlyTrap heredar de Plant e implementar IBugEater ok 
 
 Ayuda.
 System.out.println("born like a " + this.getType() + " (" + this.getSubType() + ")");
