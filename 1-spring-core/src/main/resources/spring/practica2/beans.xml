@@ -3,8 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<!-- define bean holaMundoBean -->
+	<!-- define bean por propiedad holaMundoBean -->
+	<bean id="holaMundo1" class="org.certificatic.spring.core.practica2.bean.HolaMundo">
+		<property name="mensaje" value="Hola Mundo Spring por Propiedad"/>
+	</bean>
 
-	<!-- define bean holaMundoBean2 -->
+	
+	<!-- define bean por constructor holaMundoBean2 -->
+	<bean id="holaMundo2" class="org.certificatic.spring.core.practica2.bean.HolaMundo">
+		<constructor-arg name="mensaje" value="Hola Mundo Spring por Constructor" />
+	</bean>
 
 </beans>

@@ -19,6 +19,18 @@ public class HolaMundoSpringTest1 {
 		String ruta = "spring/practica2/beans.xml";
 
 		// Implementar IoC con BeanFactory
+		BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource(ruta) );
+		
+		HolaMundo holaMundoConst = beanFactory.getBean("holaMundo1", HolaMundo.class);
+		HolaMundo holaMundoProp = beanFactory.getBean("holaMundo2", HolaMundo.class);
+		
+		Assert.assertNotNull(holaMundoConst);
+		Assert.assertNotNull(holaMundoProp);
+		
+		log.info("holaMundoConst: {}" , holaMundoConst);
+		log.info("holaMundoProp: {}" , holaMundoProp);
+		
+		
 
 	}
 }

@@ -5,8 +5,10 @@ import org.certificatic.spring.core.tarea1.notification.enums.NotificationType;
 import org.certificatic.spring.core.tarea1.notification.service.api.INotificationService;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@NoArgsConstructor
 public class NotificationServiceImpl implements INotificationService {
 
 	private @Getter @Setter IMessageService facebookMessageService;
@@ -20,5 +22,17 @@ public class NotificationServiceImpl implements INotificationService {
 			NotificationType notificationType) {
 
 		//Implementar
+		
+		switch (notificationType) {
+		case FACEBOOK:
+			facebookMessageService.sendMessage(receiver, message);
+			break;
+		case TWITTER:
+			twitterMessageService.sendMessage(receiver, message);
+			break;
+		default:
+			emailMessageService.sendMessage(receiver, message);
+			break;
+		}
 	}
 }

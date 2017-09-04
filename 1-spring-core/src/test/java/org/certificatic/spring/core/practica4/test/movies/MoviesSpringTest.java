@@ -1,8 +1,12 @@
 package org.certificatic.spring.core.practica4.test.movies;
 
+import org.certificatic.spring.core.practica4.movies.model.Movie;
+import org.certificatic.spring.core.practica4.movies.service.MovieListener;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,6 +18,8 @@ public class MoviesSpringTest {
 	@BeforeClass
 	public static void beforeClass() {
 		// Instancia ApplicationContext
+		String ruta = "spring/practica4/movies-application-context.xml";
+		applicationContext = new ClassPathXmlApplicationContext(ruta);
 	}
 
 	@Test
@@ -22,6 +28,21 @@ public class MoviesSpringTest {
 		log.info("moviesSpringTest -------------------");
 
 		//Implementa 
+		
+		MovieListener movieListener = applicationContext.getBean(MovieListener.class);
+		
+		Assert.assertNotNull(movieListener);
+		Assert.assertNotNull(movieListener.getMovieFinder());
+		
+		Movie m = movieListener.buscaPelicula("Titanic");
+		
+		Assert.assertNotNull(m);
+		
+		log.info("movieListener {}" , movieListener);
+		log.info("movieListener.getMovieFinder: {}" , movieListener.getMovieFinder());
+		log.info("m: {}" , m);
+		
+		
 
 	}
 }

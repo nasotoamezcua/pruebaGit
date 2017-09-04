@@ -28,10 +28,17 @@ public class NotificationSpringTest {
 				.getBean(INotificationService.class);
 
 		Assert.assertNotNull(notificacionService);
-
+		
 		notificacionService
-				.notifyTo("Ivan", "Bienvenidos al Workshop de Spring 4",
-						NotificationType.TWITTER);
+		.notifyTo("Nestor", "Bienvenidos al Workshop de Spring 4",
+				NotificationType.TWITTER);
+		
+		// PARA IMPRIMIR TODOS LOS VALORES NotificationType
+		for(NotificationType notiType : NotificationType.values()) {
+			notificacionService
+			.notifyTo("Nestor", "Bienvenidos al Workshop de Spring 4",
+					notiType);
+		}
 	}
 
 }

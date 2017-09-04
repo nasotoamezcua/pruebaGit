@@ -1,6 +1,7 @@
 package org.certificatic.spring.core.practica3.test.jugador;
 
 
+import org.certificatic.spring.core.practica3.jugador.JugadorFutbol;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -18,6 +19,8 @@ public class EstadioSpringTest {
 	@BeforeClass
 	public static void beforeClass() {
 		// Instanciar ApplicationContext
+		String ruta = "spring/practica3/jugador-application-context.xml";
+		applicationContext = new ClassPathXmlApplicationContext(ruta);
 	}
 
 	@Test
@@ -26,6 +29,16 @@ public class EstadioSpringTest {
 		log.info("estadioSpringTest1 -------------------");
 
 		// Implementar
+		
+		JugadorFutbol jugadorFutbol = (JugadorFutbol) applicationContext.getBean("jugadorBean");
+		
+		Assert.assertNotNull(jugadorFutbol);
+		Assert.assertNotNull(jugadorFutbol.getTorneo());
+		Assert.assertNotNull(jugadorFutbol.getTorneo().getEvento());
+		
+		log.info("{}" , jugadorFutbol);
+		log.info("{}" , jugadorFutbol.getTorneo());
+		log.info("{}" , jugadorFutbol.getTorneo().getEvento());
 	}
 
 	@Test

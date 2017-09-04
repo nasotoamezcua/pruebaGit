@@ -14,6 +14,15 @@ public class HolaMundoNoSpringTest {
 		log.info("holaMundoNoSpringTest -------------------------");
 
 		// Crear instancia de HolaMundo
+		HolaMundo holaMundoConst = new HolaMundo("Hola Mundo: Inyeccion por constructor");
+		HolaMundo holaMundoProp = new HolaMundo();
+		holaMundoProp.setMensaje("Hola Mundo: Inyeccion por propiedad");
+		
+		Assert.assertNotNull(holaMundoConst);
+		Assert.assertNotNull(holaMundoProp);
+		
+		log.info("holaMundoConst: {}" , holaMundoConst);
+		log.info("holaMundoProp: {}" , holaMundoProp);
 
 	}
 }

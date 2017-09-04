@@ -20,6 +20,16 @@ public class HolaMundoSpringTest2 {
 		String ruta = "spring/practica2/beans.xml";
 		
 		// Implementar IoC con ApplicationContext
+		ApplicationContext context = new ClassPathXmlApplicationContext(ruta);
+		
+		HolaMundo holaMundoConst = (HolaMundo)context.getBean("holaMundo1");
+		HolaMundo holaMundoProp = context.getBean("holaMundo2", HolaMundo.class);
+		
+		Assert.assertNotNull(holaMundoConst);
+		Assert.assertNotNull(holaMundoProp);
+		
+		log.info("holaMundoConst: {}" , holaMundoConst);
+		log.info("holaMundoProp: {}" , holaMundoProp);
 
 	}
 }
