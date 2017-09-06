@@ -1,12 +1,25 @@
 package org.certificatic.spring.core.practica6.initdestroy.bean;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
 import lombok.Data;
 
 @Data
-public class ConnectionDataBase {
+public class ConnectionDataBase implements InitializingBean, DisposableBean {
 	private String database;
 	private String user;
 	private String password;
+	
+	
+	public void initMethod() {
+		System.out.println("Executing default init Method");
+	}
+	
+	public void destroyMethod() {
+		System.out.println("Executing default destroy Method");
+	}
+	
 
 	public void connect() {
 		String msg = String.format("> Connecting to: %s:%s:%s**** [%s]", database, user,
@@ -20,6 +33,29 @@ public class ConnectionDataBase {
 				Integer.toHexString(super.hashCode()));
 
 		System.out.println(msg);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.springframework.beans.factory.DisposableBean#destroy()
+	 * El metodo destroy: Se ejecuta antes del metodo que esta indicado en destroy-method o default-destroy-method
+	 */
+	
+	@Override
+	public void destroy() throws Exception {
+		System.out.println("Executing destroy from disposable bean interface");
+		
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+	 * El metodo afterPropertiesSet: Se ejecuta antes del metodo que esta indicado en init-method o default-init-method
+	 */
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("Executing after properties set from initializing bean interface");
+		
 	}
 
 }

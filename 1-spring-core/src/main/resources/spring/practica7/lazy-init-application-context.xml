@@ -4,9 +4,33 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- Define bean clase Car -->
+	<!-- La clase Car no tiene sentido declararla como  scope="prototype", 
+		ya que la declaracion lazy-init="true" carga y crea el bean hasta que este es llamado
+		y scope="prototype" crea el objet hasta que se ivoca y crea un objeto nuevo cada que el bean es utilizado
+		-->
+	<bean class="org.certificatic.spring.core.practica7.lazyinit.bean.Car" lazy-init="true">
+		<property name="engine" ref="beanEngine"/>
+		<property name="wheel1" ref="beanWheel"/>
+		<property name="wheel2" ref="beanWheel"/>
+		<property name="wheel3" ref="beanWheel"/>
+		<property name="wheel4" ref="beanWheel"/>
+	</bean>
 
 	<!-- Define bean engine -->
+	<bean id="beanEngine" scope="prototype"
+		class="org.certificatic.spring.core.practica7.lazyinit.bean.Engine" >
+		<property name="cylinderNumber" value="6"/>
+		<property name="hp" value="3000" />
+		<property name="serial" value="NASA-050684"></property>
+		
+	</bean>
 
 	<!-- Define bean wheel -->
+	<bean id="beanWheel" scope="prototype"
+		class="org.certificatic.spring.core.practica7.lazyinit.bean.Wheel">
+		<property name="brand" value="Pirelli"/>
+		<property name="material" value="Pet y caucho"/>
+		<property name="rinSize" value="18"/>
+	</bean>
 
 </beans>

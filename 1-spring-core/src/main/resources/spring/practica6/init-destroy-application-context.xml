@@ -5,6 +5,12 @@
 	default-init-method="initMethod" default-destroy-method="destroyMethod">
 
 	<!-- Definir bean clase ConnectionDataBase -->
+	<bean class="org.certificatic.spring.core.practica6.initdestroy.bean.ConnectionDataBase" 
+		init-method="connect" destroy-method="disconnect">
+		<property name="database" value="db_test" />
+		<property name="user" value="nestor_soto" />
+		<property name="password" value="nasa050684"/>
+	</bean>
 
 
 </beans>
