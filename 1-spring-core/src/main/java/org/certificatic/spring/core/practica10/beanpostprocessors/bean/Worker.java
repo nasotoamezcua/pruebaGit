@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @ToString
-public class Worker {
+public class Worker implements IWorker {
 	private @Getter @Setter String name;
 	private @Getter @Setter int age;
 
