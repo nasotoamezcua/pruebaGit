@@ -4,7 +4,26 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- Define bean clase Person -->
-
+	<bean class="org.certificatic.spring.core.practica11.innerbeans.bean.Person">
+		<property name="name">
+			<bean id="nameBean" class="java.lang.String">
+				<constructor-arg value="Nestor Soto"/>
+			</bean>
+		</property>
+		<property name="age" value="33"/>
+		<property name="address">
+			<bean class="org.certificatic.spring.core.practica11.innerbeans.bean.Address">
+				<property name="externalNumber" value="67"/>
+				<property name="internalNumber" value="69"/>
+				<property name="neighbor" value="neighbor"/>
+				<property name="street" ref="streetNameBean"/>
+			</bean>
+		</property>
+	</bean>
+	
 	<!-- Define bean streetNameBean -->
+	<bean id="streetNameBean" class="java.lang.String">
+		<constructor-arg value="Lucrecia Toris"/>
+	</bean>
 
 </beans>

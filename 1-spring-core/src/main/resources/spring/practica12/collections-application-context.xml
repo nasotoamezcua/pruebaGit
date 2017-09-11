@@ -4,6 +4,105 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- Define bean clase AddressBook -->
+	<bean class="org.certificatic.spring.core.practica12.collections.bean.AddressBook">
+		<!-- List<Address> -->
+		<property name="addresses">
+			<list>
+				<ref bean="ivanDireccionBean"/>
+				<ref bean="ivanDireccionBean"/>
+				<ref bean="ivanDireccionBean"/>
+				<ref bean="lauraDireccionBean"/>
+				<ref bean="pedroDireccionBean"/>
+				<bean class="org.certificatic.spring.core.practica12.collections.bean.Address">
+					<constructor-arg name="street" value="Hegel" type="java.lang.String" />
+					<constructor-arg name="externalNumber" value="2" type="int" />
+					<constructor-arg name="internalNumber" value="10" type="java.lang.Integer" />
+					<property name="neighbor" value="Pencil"></property>
+				</bean>
+			</list>
+		</property>
+		
+		<!-- Set<Phone> -->
+		<property name="phones">
+			<set>
+				<ref bean="telefonoPapa"/>
+				<ref bean="telefonoPapa"/>
+				<ref bean="telefonoPapa"/>
+				<ref bean="telefonoMama"/>
+				<ref bean="telefonoMama"/>
+				<ref bean="telefonoMama"/>
+				<ref bean="telefonoHermanaMayor"/>
+				<ref bean="telefonoHermanaMayor"/>
+				<ref bean="telefonoHermanaMayor"/>
+				<ref bean="telefonoHermanoMenor"/>
+				<ref bean="telefonoHermanoMenor"/>
+				<ref bean="telefonoHermanoMenor"/>
+				<bean class="org.certificatic.spring.core.practica12.collections.bean.Phone">
+					<property name="number" value="5534-8595"></property>
+				</bean>
+			</set>
+		</property>
+		
+		<!-- Map<Integer, String> -->
+		<property name="emergencyNumbers">
+			<map>
+				<entry key="1" value="Bomberos: 060" />
+				<entry key="2" value="Bomberos: 070" />
+				<entry key="3" value="Bomberos: 080" />
+				<entry key-ref="numero4">
+					<bean class="java.lang.String">
+						<constructor-arg>
+							<value>Número Suegros: xxx</value>
+						</constructor-arg>
+					</bean>
+				</entry>
+			</map>
+		</property>
+		
+		<!-- Properties -->
+		<property name="family">
+			<props>
+				<prop key="papa">Nestor Soto</prop>
+				<prop key="mama">Ofelia Amezcua</prop>
+				<prop key="hermanoMayor">ofelia Amezcua</prop>
+				<prop key="hermanoMenor">Ricardo Soto</prop>
+			</props>
+		</property>
+		
+		<!-- Integer[] -->
+		<property name="numbers">
+			<array>
+				<value>1</value>
+				<value>2</value>
+				<value>3</value>
+				<ref bean="numero4"/>
+			</array>
+		</property>
+		
+		<!-- String[] -->
+		<property name="notes" value="Nestor,Alejandro,Soto,Amezcua,!!"/>
+		
+		<!-- Object[] Se puede utilizar array,list o set-->
+		<property name="persons">
+			<list>
+				<bean class="org.certificatic.spring.core.practica12.collections.bean.Person">
+					<property name="name" value="Ivan" />
+					<property name="age" value="28" />
+				</bean>
+				<bean class="org.certificatic.spring.core.practica12.collections.bean.Person">
+					<property name="name" value="Ivan" />
+					<property name="age" value="28" />
+				</bean>
+				<bean class="org.certificatic.spring.core.practica12.collections.bean.Person">
+					<property name="name" value="Ivan" />
+					<property name="age" value="28" />
+				</bean><bean class="org.certificatic.spring.core.practica12.collections.bean.Person">
+					<property name="name" value="Ivan" />
+					<property name="age" value="29" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 
 	<bean name="telefonoPapa"

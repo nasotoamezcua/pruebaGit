@@ -2,6 +2,8 @@ package org.certificatic.spring.core.practica14.test.numericalConverter;
 
 import java.text.DecimalFormat;
 
+import org.certificatic.spring.core.practica14.numericalConverter.bean.NumericalConverter;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -30,7 +32,15 @@ public class NumericalConverterTest {
 		log.info("numericalConverterTest -------------------");
 
 		// Obtener bean NumericalConverter
+		NumericalConverter numericalConverter = applicationContext.getBean(NumericalConverter.class);
 		// realizar test con Asserts
+		Assert.assertNotNull(numericalConverter);
+		
+		double number = Math.random() * 999_999_999;
+		
+		log.info("number: {}", currencyFormat.format(number));
+		log.info("number in letter: {}", numericalConverter.convert(
+					simpleNumberFormat.format(number).toString(), true));
 
 		((AbstractApplicationContext) applicationContext).close();
 	}

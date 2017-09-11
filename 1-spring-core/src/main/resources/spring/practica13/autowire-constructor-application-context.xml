@@ -7,13 +7,28 @@
 
 
 	<!-- Define bean clase Car -->
+	<bean class="org.certificatic.spring.core.practica13.autowire.bean.Car" 
+		autowire="constructor" scope="prototype"/>
 
 	<!-- Define bean engine -->
+	<bean class="org.certificatic.spring.core.practica13.autowire.bean.Engine" scope="prototype" 
+		p:cylinderNumber="8" p:model="V8" p:serialNumber="123-ABC"/>
 
 	<!-- Define bean wheelGroup -->
+	<!-- Lo buca por "byType" si no lo encuentra, lo busca por nombre "byName"-->
+	<bean class="org.certificatic.spring.core.practica13.autowire.bean.WheelGroup" 
+		autowire="constructor" scope="prototype"/>
 
 	<!-- Define lista wheelList -->
+	<util:list id="wheelList" list-class="java.util.ArrayList" scope="prototype">
+		<ref bean="wheel"/>
+		<ref bean="wheel"/>
+		<ref bean="wheel"/>
+		<ref bean="wheel"/>
+	</util:list>
 
 	<!-- Define bean wheel -->
+	<bean id="wheel" class="org.certificatic.spring.core.practica13.autowire.bean.Wheel"
+		p:material="caucho" p:rinSize="18" p:speedIndicator="150 75 Y" scope="prototype"/>
 
 </beans>
