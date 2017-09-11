@@ -22,6 +22,7 @@ public class BeanPostProcessor3 implements BeanPostProcessor, Ordered {
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		System.out.println("[BPP After Initialization " + order + " ]");
 
+		
 		if (bean instanceof Worker) {
 			Worker worker = (Worker) bean;
 			
@@ -30,6 +31,7 @@ public class BeanPostProcessor3 implements BeanPostProcessor, Ordered {
 			
 			bean = proxy;
 		}
+		
 		return bean;
 	}
 
