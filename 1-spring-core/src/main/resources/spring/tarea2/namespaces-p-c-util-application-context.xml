@@ -6,6 +6,9 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
 	<!-- Define bean Agenda -->
+	<bean class="org.certificatic.spring.core.tarea2.namespaces.pcutil.bean.Agenda" 
+		p:notas-ref="notasListBean" p:autosFamilia-ref="autoSetBean"
+		p:numeros-ref="numeroMapBean" p:properties-ref="propertiesBean"/>
 
 	<bean
 		class="org.certificatic.spring.core.tarea2.namespaces.pcutil.bean.Persona"
@@ -14,7 +17,59 @@
 	<bean id="autoBean"
 		class="org.certificatic.spring.core.tarea2.namespaces.pcutil.bean.Auto"
 		c:marca="Seat" c:modelo-ref="modeloStringBean" />
+		
+	<bean class="java.lang.String" id="modeloStringBean">
+		<constructor-arg>
+			<value>Ibiza</value>
+		</constructor-arg>
+	</bean>
+		
+	<bean id="autoBeanMazda"
+		class="org.certificatic.spring.core.tarea2.namespaces.pcutil.bean.Auto"
+		c:marca="Mazda" c:modelo-ref="modeloStringBean2" />
+		
+	<bean class="java.lang.String" id="modeloStringBean2">
+		<constructor-arg>
+			<value>CX-3</value>
+		</constructor-arg>
+	</bean>
 
 	<!-- Define Beans al gusto usando p, c y util -->
+	
+	<bean class="org.certificatic.spring.core.tarea2.namespaces.pcutil.bean.Circulo" p:radio="5.55">
+		<property name="pi">
+			<util:constant static-field="java.lang.Math.PI"/>
+		</property>
+	</bean>
+	
+	<bean class="org.certificatic.spring.core.tarea2.namespaces.pcutil.bean.MisProperties" 
+		p:nombreCurso="Spring Core 4" p:nombreHijo="Nestor Alejandro Jr" p:programmerName="Nestor Soto" />
+		
+	<util:list id="notasListBean" list-class="java.util.ArrayList">
+		<value>Nota uno</value>
+		<value>Nota dos</value>
+		<value>Nota tes</value>
+		<value>Nota cuatro</value>
+		<value>Nota cinco</value>
+	</util:list>
+	
+	<util:set id="autoSetBean" set-class="java.util.HashSet">
+		<ref bean="autoBean"/>
+		<ref bean="autoBeanMazda"/>
+		<ref bean="autoBean"/>
+		<ref bean="autoBeanMazda"/>
+	</util:set>
+	
+	<util:map id="numeroMapBean" map-class="java.util.HashMap">
+		<entry key="uno" value="1"/>
+		<entry key="dos" value="2"/>
+		<entry key="tres" value="3"/>
+		<entry key="cuatro" value="4"/>
+		<entry key="cinco" value="5"/>
+	</util:map>
+	
+	<util:properties id="propertiesBean" location="classpath:/spring/tarea2/properties/*.properties">
+		<prop key="programer.name">Nestor Soto</prop>
+	</util:properties>
 
 </beans>

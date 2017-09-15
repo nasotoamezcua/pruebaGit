@@ -8,28 +8,35 @@ import org.certificatic.spring.core.practica17.stereotypes.api.IServiceClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 // Implementar run with spring-test
+@RunWith(SpringJUnit4ClassRunner.class)
 // cargar context configuration
+@ContextConfiguration("classpath:/spring/practica17/component-scan-stereotypes-application-context.xml")
 public class StereotypesBetterTest {
 
 	// Inyectar todas las dependencias
 
+	@Autowired
 	private IRestControllerClass restController;
-
+	@Autowired
 	private IRestControllerClass restController2;
-
+	@Autowired
 	private IServiceClass service;
-
+	@Autowired
 	private IServiceClass service2;
-
+	@Autowired
 	private IControllerClass controller;
-
+	@Autowired
 	private IComponentClass component;
-
+	@Autowired
 	private IRepositoryClass repository;
 
 	@Before
@@ -40,7 +47,9 @@ public class StereotypesBetterTest {
 		Assert.assertNotNull(controller);
 		Assert.assertNotNull(repository);
 
+		//Indica que esten referenciados al mismo objeto
 		Assert.assertSame(restController, restController2);
+		//Indica que son objetos diferente
 		Assert.assertNotSame(service, service2);
 	}
 

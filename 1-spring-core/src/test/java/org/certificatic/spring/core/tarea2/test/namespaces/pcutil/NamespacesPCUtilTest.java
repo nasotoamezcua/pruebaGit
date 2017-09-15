@@ -37,8 +37,9 @@ public class NamespacesPCUtilTest {
 		Circulo circulo = applicationContext.getBean(Circulo.class);
 
 		Assert.assertNotNull(circulo);
+		Assert.assertNotNull(circulo.getArea());
 
-		log.info("circulo: {}", circulo);
+		log.info("circulo: {} ,\t Area del Circulo: {}", circulo, circulo.getArea());
 
 		Agenda agenda = applicationContext.getBean(Agenda.class);
 
