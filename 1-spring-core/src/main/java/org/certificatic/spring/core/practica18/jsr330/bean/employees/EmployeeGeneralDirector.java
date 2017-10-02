@@ -1,7 +1,12 @@
 package org.certificatic.spring.core.practica18.jsr330.bean.employees;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import org.certificatic.spring.core.practica18.jsr330.bean.Employee;
 
+@Named("generalDirectorEmployee")
+@Singleton
 public class EmployeeGeneralDirector extends Employee {
 
 	public EmployeeGeneralDirector() {

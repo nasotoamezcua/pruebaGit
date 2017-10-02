@@ -2,7 +2,7 @@ package org.certificatic.spring.core.practica19.javaconfig.bean;
 
 public class DummyRepository {
 
-	private String connectionString;
+		private String connectionString;
 
 	public DummyRepository(String connectionString) {
 		this.connectionString = connectionString;

@@ -1,6 +1,10 @@
 package org.certificatic.spring.core.practica19.test.javaconfig;
 
+import javax.annotation.Resource;
+import javax.inject.Inject;
+
 import org.apache.commons.math3.complex.Complex;
+import org.certificatic.spring.core.practica19.javaconfig.ApplicationConfig;
 import org.certificatic.spring.core.practica19.javaconfig.bean.DummyRepository;
 import org.certificatic.spring.core.practica19.javaconfig.bean.DummyService;
 import org.certificatic.spring.core.practica19.javaconfig.bean.QuadraticEquation;
@@ -10,36 +14,55 @@ import org.certificatic.spring.core.practica19.javaconfig.bean.api.QuadraticEqua
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 // Implementar run with spring-test
+@RunWith(SpringJUnit4ClassRunner.class)
 // cargar context configuration
+@ContextConfiguration(classes = {ApplicationConfig.class})
 public class JavaConfigTest {
 
 	// Inyectar todas las dependencias
 
+	@Autowired
 	private ApplicationContext applicationContext;
 
+	@Inject
 	private IQuadraticEquationService quadraticService;
 
+	@Inject
 	private IQuadraticEquationService quadraticService2;
 
+	@Autowired
+	@Qualifier("quadraticEquationServiceBean")
 	private IQuadraticEquationService quadraticService2x;
 
+	@Autowired
+	@Qualifier("quadraticService2")
 	private IQuadraticEquationService quadraticService2xx;
 
+	@Resource
 	private IQuadraticEquationService quadraticService3;
 
+	@Inject
 	private QuadraticEquation quadraticEquation;
 
+	@Inject
 	private DummyService dummyService;
 
+	@Resource(name = "dummyService2")
 	private DummyService dummyServiceBean;
 
+	@Inject
 	private DummyRepository dummyRepository;
 
 	@Before
