@@ -1,6 +1,6 @@
 package org.certificatic.spring.core.practica21.test.methodinjection;
 
-import org.certificatic.spring.core.practica21.methodinjection.bean.SingletonBean;
+import org.certificatic.spring.core.practica21.methodinjection.bean.SingletonBean4;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,17 +13,17 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { MethodInjectionTest.location })
-public class MethodInjectionTest {
+@ContextConfiguration(locations = { MethodInjectionTest4.location })
+public class MethodInjectionTest4 {
 
 	public static final String location = "classpath:/spring/practica21/method-injection-context.xml";
 	
 
 	@Autowired
-	private SingletonBean singletonBean1;
+	private SingletonBean4 singletonBean1;
 
 	@Autowired
-	private SingletonBean singletonBean2;
+	private SingletonBean4 singletonBean2;
 
 	@Before
 	public void setUp() {
