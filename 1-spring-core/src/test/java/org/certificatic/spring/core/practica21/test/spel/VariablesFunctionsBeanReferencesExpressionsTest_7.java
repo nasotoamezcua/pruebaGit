@@ -38,9 +38,10 @@ public class VariablesFunctionsBeanReferencesExpressionsTest_7 {
 		springContext = new StandardEvaluationContext();
 		
 		// asignar al 'springContext' el bean resolver 'MyBeanResolver' que se encuentra en el application context
-		springContext.setBeanResolver(null);
+		springContext.setBeanResolver(applicationContext.getBean(MyBeanResolver.class));
 	}
 
+	//variablesExpressionsTest() OK
 	@Test
 	public void variablesExpressionsTest() {
 
@@ -52,7 +53,7 @@ public class VariablesFunctionsBeanReferencesExpressionsTest_7 {
 
 		// defnir y obtener el valor de una expresión que acceda al bean gessNumberBean definido en el aplication-context.xml
 		// y recupere el valor de la propiedad randomNumber
-		Integer randomNumber = spelParser.parseExpression(null).getValue(springContext, Integer.class);
+		Integer randomNumber = spelParser.parseExpression("@guessNumberBean.randomNumber").getValue(springContext, Integer.class);
 
 		springContext.setVariable("randomNumber", randomNumber); // sólo analizar
 
@@ -70,6 +71,7 @@ public class VariablesFunctionsBeanReferencesExpressionsTest_7 {
 		log.info("gessNumberBean.randomNumber: {}", randomNumber);
 	}
 
+	//functionsExpressionsTest() OK
 	@Test
 	@SneakyThrows
 	public void functionsExpressionsTest() {
@@ -82,14 +84,16 @@ public class VariablesFunctionsBeanReferencesExpressionsTest_7 {
 		springContext.setVariable("c", -10);
 
 		// registra una función llamada 'chicharronera' que invoque al método 'calculate' de la clase Chicharronera
-		springContext.registerFunction(null, null);
+		springContext.registerFunction("chicharronera",
+				Chicharronera.class.getDeclaredMethod("calculate", 
+						new Class[]{double.class, double.class, double.class}));
 
 		QuadraticEquationResult expectedResult = QuadraticEquationResult.builder().x1(new Complex(1.0697, 0.0))
 				.x2(new Complex(-1.8697, 0.0)).build(); // sólo analiza
 
 		// definir y obtener el valor de la expresión que invoque a la función 'chicharronera' tomando como argumentos
 		// las variables 'a', 'b' y 'c'
-		QuadraticEquationResult quadraticEquationResult = spelParser.parseExpression(null)
+		QuadraticEquationResult quadraticEquationResult = spelParser.parseExpression("#chicharronera(#a,#b,#c)")
 				.getValue(springContext, QuadraticEquationResult.class);
 
 		Assert.assertNotNull(quadraticEquationResult);
@@ -99,13 +103,14 @@ public class VariablesFunctionsBeanReferencesExpressionsTest_7 {
 		log.info("quadraticEquationResult: {}", quadraticEquationResult);
 	}
 
+	//beanReferencesExpressionsTest() OK
 	@SuppressWarnings("unchecked")
 	@Test
 	public void beanReferencesExpressionsTest() {
 
 		log.info("beanReferencesExpressionsTest -------------------");
 
-		GuessNumber guessNumber = spelParser.parseExpression("@gessNumberBean").getValue(springContext,
+		GuessNumber guessNumber = spelParser.parseExpression("@guessNumberBean").getValue(springContext,
 				GuessNumber.class); //sólo analiza
 		
 		Assert.assertNotNull(guessNumber);

@@ -33,6 +33,7 @@ public class AssignmentTypesConstructorExpressionsTest_6 {
 				SocietyStub.createSociety("IEEE"));
 	}
 
+	//assignmentExpressionsTest() OK
 	@Test
 	public void assignmentExpressionsTest() {
 
@@ -63,13 +64,14 @@ public class AssignmentTypesConstructorExpressionsTest_6 {
 		// -------------------------------------
 
 		// definir una expresión que asigne y obtenga a la vez el nombre 'Nikola Tesla' sobre el nombre del Inventor Tesla
-		String teslaName3 = spelParser.parseExpression(null).getValue(teslaContext, String.class);
+		String teslaName3 = spelParser.parseExpression("name = 'Nikola Tesla'").getValue(teslaContext, String.class);
 		
 		Assert.assertEquals(teslaNameExpected, teslaName3);
 		
 		log.info("teslaName3: {}", teslaName3);
 	}
 
+	//typesExpressionsTest() OK
 	@Test
 	public void typesExpressionsTest() {
 
@@ -80,9 +82,11 @@ public class AssignmentTypesConstructorExpressionsTest_6 {
 		Assert.assertEquals(Date.class, dateClass);
 
 		// definir una expresión que calcule el área de un circulo de 5.5 de radio (multiplicar y dividir por 1000.0 para truncar decimales
-		Double circleArea = spelParser.parseExpression(null).getValue(Double.class);
+		Double circleArea = spelParser.parseExpression(
+					"T(Math).round( T(Math).PI * T(Math).pow('5.5', '2') * 1000.0 ) / 1000.0")
+				.getValue(Double.class);
 
-		Assert.assertEquals(95.0332D, circleArea, 0.0001);
+		Assert.assertEquals(95.033D, circleArea, 0.0001);
 		
 		// -------------------------------------
 
@@ -91,6 +95,7 @@ public class AssignmentTypesConstructorExpressionsTest_6 {
 		Assert.assertEquals(95.0332D, doubleNumber, 0.0001);
 	}
 
+	//contructorExpressionsTest() OK
 	@Test
 	public void contructorExpressionsTest() {
 
@@ -115,11 +120,15 @@ public class AssignmentTypesConstructorExpressionsTest_6 {
 
 		// definir y obtener el valor de una expresión que obtenga el valor (objeto) de un Inventor cuyos datos sean:
 		// nombre: 'Albert Einstein', fecha de nacimiento: (la fecha definida en c) y nacionalidad: 'German'
-		Inventor inventor = spelParser.parseExpression(null).getValue(context, Inventor.class);
+		Inventor inventor = spelParser.parseExpression(
+				"new org.certificatic.spring.core.practica21.spel.model.Inventor('Albert Einstein', #birthday.getTime(), 'German')")
+				.getValue(context, Inventor.class);
 
 		// definir y obtener el valor de una expresión que obtenga un arreglo de strings cuyos valores sean:
 		// 'absorption refrigerator', 'quantum theory', 'theory of general relativity'
-		String[] stringArray = spelParser.parseExpression(null).getValue(String[].class);
+		String[] stringArray = spelParser.parseExpression(
+				"new String[]{'absorption refrigerator', 'quantum theory', 'theory of general relativity'}")
+				.getValue(String[].class);
 
 		inventor.setInventions(stringArray);
 

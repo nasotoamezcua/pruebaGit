@@ -1,11 +1,6 @@
 TODO 1.
 Analizar clases POJO GuessNumber y Magician
 
-
-TODO 2.
-Analizar TEST ResourceClassPathXmlApplicationContextTest (ojo revisar carpeta copy-classpath)
-
-
 TODO 3.
 Definir bean GuessNumber y Magician en \spring\practica21\spel-application-context.xml
 
