@@ -1,6 +1,7 @@
 package org.certificatic.spring.aop.practica24.bank.aop.logging;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.certificatic.spring.aop.util.Color;
 import org.certificatic.spring.aop.util.bean.api.IColorWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class ProfilingAspect implements Ordered {
 	// Define Around ADvice que intercepte cualquier método del paquete
 	// org.certificatic.spring.aop.practica24.bank..* y cache al menos el primer
 	// argumento
+	@Around(value = "within(org.certificatic.spring.aop.practica24.bank..* ) && args(obj,..)", argNames = "obj")
 	public Object beforeAccountMethodExecutionAccount(ProceedingJoinPoint pjp,
 			Object obj) throws Throwable {
 
@@ -35,7 +37,7 @@ public class ProfilingAspect implements Ordered {
 
 		try {
 
-			return null; // proceder con la ejecución al target object
+			return pjp.proceed(); // proceder con la ejecución al target object
 
 		} catch (RuntimeException e) {
 			isExceptionThrown = true;
