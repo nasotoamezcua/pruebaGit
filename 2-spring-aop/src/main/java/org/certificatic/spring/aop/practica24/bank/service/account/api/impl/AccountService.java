@@ -19,28 +19,37 @@ public class AccountService implements IAccountService {
 
 	@Override
 	public void updateAccountBalance(Account account, Long amount) {
+		
+		/*
 		log.info(
 				"Inside accountService.updateAccountBalance(). Account: {}, ammount: {}",
 				account.getAccountNumber(),
 				amount);
+		*/
 
 		accountDAO.updateBalance(account, amount);
 	}
 
 	@Override
 	public List<Account> findCustomerAccounts(Long customerId) {
+		
+		/*
 		log.info(
 				"Inside accountService.findCustomerAccounts(). Finding accounts for customer: {}",
 				customerId);
+		*/
 
 		return accountDAO.findByCustomerId(customerId);
 	}
 
 	@Override
 	public void updateAccountDescription(Account account) {
+		
+		/*
 		log.info(
 				"Inside accountService.updateAccountDescription(). Updating account [{}] description to: {}",
 				account.getAccountNumber(), account.getAccountDescription());
+		*/
 
 		accountDAO.updateDescription(account);
 	}

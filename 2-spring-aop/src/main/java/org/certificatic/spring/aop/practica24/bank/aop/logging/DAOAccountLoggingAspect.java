@@ -1,5 +1,6 @@
 package org.certificatic.spring.aop.practica24.bank.aop.logging;
 
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.certificatic.spring.aop.practica24.bank.app.model.Account;
@@ -13,6 +14,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 // Define el Bean como Aspecto
+@Aspect
 @Component("daoAccountLoggingAspect")
 @Slf4j
 public class DAOAccountLoggingAspect implements Ordered {

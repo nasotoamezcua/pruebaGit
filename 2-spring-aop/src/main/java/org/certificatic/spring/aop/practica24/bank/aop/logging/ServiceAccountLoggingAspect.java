@@ -1,6 +1,7 @@
 package org.certificatic.spring.aop.practica24.bank.aop.logging;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.certificatic.spring.aop.practica24.bank.app.model.Account;
 import org.certificatic.spring.aop.util.Color;
@@ -13,6 +14,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 //Define el Bean como Aspecto
+@Aspect
 @Component("serviceAccountLoggingAspect")
 @Slf4j
 public class ServiceAccountLoggingAspect implements Ordered {

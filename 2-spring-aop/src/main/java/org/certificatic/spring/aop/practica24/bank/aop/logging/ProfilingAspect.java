@@ -2,6 +2,7 @@ package org.certificatic.spring.aop.practica24.bank.aop.logging;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.certificatic.spring.aop.util.Color;
 import org.certificatic.spring.aop.util.bean.api.IColorWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 //Define el Bean como Aspecto
+@Aspect
 @Component("profilingAspect")
 @Slf4j
 public class ProfilingAspect implements Ordered {
