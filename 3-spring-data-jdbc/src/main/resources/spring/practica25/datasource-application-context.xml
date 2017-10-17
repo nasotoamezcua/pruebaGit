@@ -13,21 +13,17 @@
 
 	<!-- H2 In-memory database -->
 	<beans profile="h2-in-memory">
-		<import
-			resource="classpath:/spring/datasources/test-datasource-application-context.xml" />
+		<import resource="classpath:/spring/datasources/test-datasource-application-context.xml" />
 	</beans>
-
 
 	<!-- H2 local database -->
 	<beans profile="h2-local">
-		<import
-			resource="classpath:/spring/datasources/h2-datasource-application-context.xml" />
+		<import resource="classpath:/spring/datasources/h2-datasource-application-context.xml" />
 	</beans>
 
 	<!-- MySQL local database -->
 	<beans profile="mysql">
-		<import
-			resource="classpath:/spring/datasources/mysql-datasource-application-context.xml" />
+		<import resource="classpath:/spring/datasources/mysql-datasource-application-context.xml" />
 	</beans>
 
 </beans>
