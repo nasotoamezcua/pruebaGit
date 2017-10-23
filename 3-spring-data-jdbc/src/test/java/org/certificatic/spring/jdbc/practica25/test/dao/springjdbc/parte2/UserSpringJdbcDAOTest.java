@@ -38,7 +38,7 @@ public class UserSpringJdbcDAOTest {
 	public void setUp() {
 		Assert.assertNotNull(userDAO);
 		Assert.assertNotNull(customerDAO);
-		Assert.assertNotNull(accountDAO);
+		//Assert.assertNotNull(accountDAO);
 	}
 
 	@Test
@@ -65,13 +65,14 @@ public class UserSpringJdbcDAOTest {
 		Assert.assertEquals(user, newUser);
 
 		log.info("user : {} {}", user, System.identityHashCode(user));
-
+		
 		Customer customer = customerDAO.findById(user.getCustomer().getId());
 
 		Assert.assertEquals(user.getCustomer(), customer);
 
 		log.info("customer : {} {}", customer,
 				System.identityHashCode(customer));
+		
 
 	}
 
@@ -125,6 +126,7 @@ public class UserSpringJdbcDAOTest {
 
 		log.info("customer : {} {}", customer,
 				System.identityHashCode(customer));
+		
 	}
 
 	@Test
@@ -169,6 +171,7 @@ public class UserSpringJdbcDAOTest {
 
 		log.info("customer : {} {}", customer,
 				System.identityHashCode(customer));
+		
 	}
 
 	@Test
