@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
 		locations = "classpath:/spring/practica25/spring-jdbc-application-context.xml")
-@ActiveProfiles("h2-in-memory")
+@ActiveProfiles("h2-local")
 public class UserSpringJdbcDAOTest {
 
 	@Autowired
@@ -38,7 +38,7 @@ public class UserSpringJdbcDAOTest {
 	public void setUp() {
 		Assert.assertNotNull(userDAO);
 		Assert.assertNotNull(customerDAO);
-		//Assert.assertNotNull(accountDAO);
+		Assert.assertNotNull(accountDAO);
 	}
 
 	@Test

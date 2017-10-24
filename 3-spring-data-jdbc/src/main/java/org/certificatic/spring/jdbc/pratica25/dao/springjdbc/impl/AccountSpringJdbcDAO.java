@@ -56,7 +56,8 @@ public class AccountSpringJdbcDAO extends GenericSpringJdbcDAO<Account, Long>
 		
 		//INSERT INTO ACCOUNT_TBL VALUES (null, :fkCustomerId, :accountNumber, :createdDate, :balance)
 		this.namedJdbcTemplate.update(INSERT_ACCOUNT, parameterSource, keyHolder);
-
+		
+		entity.setId(keyHolder.getKey().longValue());
 	}
 
 	@Override
@@ -87,7 +88,7 @@ public class AccountSpringJdbcDAO extends GenericSpringJdbcDAO<Account, Long>
 			// Implementar mediante JdbcTemplate y AccountRowMapper
 			// Se espera un único objeto
 			// SELECT * FROM ACCOUNT_TBL WHERE ACCOUNT_ID = ?
-			this.jdbcTemplate.queryForObject(SELECT_ACCOUNT, new AccountRowMapper(), id);
+			account = this.jdbcTemplate.queryForObject(SELECT_ACCOUNT, new AccountRowMapper(), id);
 
 		} catch (EmptyResultDataAccessException ex) {
 			// Cuando se usa queryForObject se espera al menos 1 resultado.
