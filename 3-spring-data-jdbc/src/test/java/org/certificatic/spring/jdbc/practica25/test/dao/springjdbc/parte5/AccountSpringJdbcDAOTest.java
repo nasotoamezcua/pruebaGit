@@ -1,7 +1,6 @@
 package org.certificatic.spring.jdbc.practica25.test.dao.springjdbc.parte5;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 import org.certificatic.spring.jdbc.pratica25.dao.api.IAccountDAO;
@@ -26,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
 		locations = "classpath:/spring/practica25/spring-jdbc-application-context.xml")
-@ActiveProfiles("h2-local")
+@ActiveProfiles("mysql")
 public class AccountSpringJdbcDAOTest {
 
 	@Autowired
@@ -48,31 +47,30 @@ public class AccountSpringJdbcDAOTest {
 	@Test
 	public void createAccountTest() {
 		
-		User newUser = User.builder().username("nestor55").password("555555")
-				.build();
+		/*
+		User newUser = User.builder().username("nestor55").password("555555").build();
 
-		Customer newCustomer = Customer.builder().name("Nestor")
-				.lastName("Soto").user(newUser).build();
+		Customer newCustomer = Customer.builder().name("Nestor").lastName("Soto").user(newUser).build();
 
 		newUser.setCustomer(newCustomer);
 
 		userDAO.insert(newUser);
+		*/
 		
-		Customer c = customerDAO.findById(1L);
+		
+		Customer newCustomer = customerDAO.findById(2L);
 		
 		Account accountNew = Account.builder()
-				.accountNumber("nasotoamezcua84")
-				.createdDate(new CustomDate(new Date().getTime()))
-				.balance(new BigDecimal("5000000.45"))
+				.accountNumber("00112233445599")
+				.createdDate(new CustomDate())
+				.balance(new BigDecimal("51234567.45"))
 				.build();
 
-		accountNew.setCustomer(c);
+		accountNew.setCustomer(newCustomer);
 		
 		accountDAO.insert(accountNew);
 
 		log.info("accountNew : {} {}", accountNew, System.identityHashCode(accountNew));
-		
-		log.info("accountNew ID : {} {}", accountNew.getId(), System.identityHashCode(accountNew.getId()));
 
 		log.info("accountNew (detached) : {} {}", accountNew,
 				System.identityHashCode(accountNew));
@@ -104,15 +102,15 @@ public class AccountSpringJdbcDAOTest {
 
 		List<Account> accounts = accountDAO.findByCustomerId(customer.getId());
 
-		Account account_2 = accountDAO.findById(3L);
+		Account account_2 = accountDAO.findById(2L);
 
 		Assert.assertNotNull(user);
 		Assert.assertNotNull(customer);
 		Assert.assertNotNull(accounts);
 		Assert.assertNotNull(account_2);
 
-		Assert.assertEquals("nestor55", user.getUsername());
-		Assert.assertEquals("Nestor", customer.getName());
+		Assert.assertEquals("xvanhalenx", user.getUsername());
+		Assert.assertEquals("Ivan Venor", customer.getName());
 		Assert.assertEquals(account_2, accounts.get(1));
 
 		log.info("user: {}", user);
