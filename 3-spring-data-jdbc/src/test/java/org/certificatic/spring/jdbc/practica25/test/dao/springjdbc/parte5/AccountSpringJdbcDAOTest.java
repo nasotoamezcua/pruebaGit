@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
 		locations = "classpath:/spring/practica25/spring-jdbc-application-context.xml")
-@ActiveProfiles("mysql")
+@ActiveProfiles("h2-local")
 public class AccountSpringJdbcDAOTest {
 
 	@Autowired
@@ -47,21 +47,16 @@ public class AccountSpringJdbcDAOTest {
 	@Test
 	public void createAccountTest() {
 		
-		/*
-		User newUser = User.builder().username("nestor55").password("555555").build();
-
-		Customer newCustomer = Customer.builder().name("Nestor").lastName("Soto").user(newUser).build();
-
+		log.info("createAccountTest -------------------");
+		
+		// INSERTAR NUEVO USER Y NUEVO CUSTOMER 
+		User newUser = User.builder().username("prueba4").password("prueba05").build();
+		Customer newCustomer = Customer.builder().name("Try4").lastName("TryTry4").build();
 		newUser.setCustomer(newCustomer);
-
 		userDAO.insert(newUser);
-		*/
-		
-		
-		Customer newCustomer = customerDAO.findById(2L);
 		
 		Account accountNew = Account.builder()
-				.accountNumber("00112233445599")
+				.accountNumber("00112233445533")
 				.createdDate(new CustomDate())
 				.balance(new BigDecimal("51234567.45"))
 				.build();
@@ -83,13 +78,119 @@ public class AccountSpringJdbcDAOTest {
 		
 		Customer customer = customerDAO.findById(account.getCustomer().getId());
 
-		Assert.assertEquals(account.getCustomer().getId(), customer.getId());
+		Assert.assertEquals(customer.getId(), accountNew.getCustomer().getId());
 
-		log.info("customer ID : {} {}", customer.getId(),
+		log.info("customer ID : {} {}", customer,
 				System.identityHashCode(customer.getId()));
+	}
+	
+	@Test
+	public void updateAccountTest() {
+		
+		log.info("updateAccountTest -------------------");
+		
+		//BUSCAR EL CUSTOMER CON EL ID 3
+		Customer FindCustomer = customerDAO.findById(3L);
+		
+		// CREAR UNA CUENTA NUEVA REFERENCIADA AL CUSTOMER CON ID 3
+		Account accountNew = Account.builder()
+				.accountNumber("00112233445534")
+				.createdDate(new CustomDate())
+				.balance(new BigDecimal("51234567.45"))
+				.build();
+		
+		accountNew.setCustomer(FindCustomer);
+		
+		accountDAO.insert(accountNew);
+		
+		log.info("accountNew : {} {}", accountNew,
+				System.identityHashCode(accountNew));
+
+		log.info("accountNew (detached) : {} {}", accountNew,
+				System.identityHashCode(accountNew));
+		
+		Account account = accountDAO.findById(accountNew.getId());
+		
+		Assert.assertEquals(account, accountNew);
+		
+		log.info("account : {} {}", account,
+				System.identityHashCode(account));
+		
+		//Actualizamos los datos de la cuenta y lo referenciamos al customer con el ID 2
+		account.setAccountNumber("00112233445555");
+		account.setBalance(new BigDecimal("87234567.45"));
+		
+		// QUEDA LA DUDA DE COMO ACTUALIZAR EL ID DEL ACCOUNT
+		account.getCustomer().setId(2L);
 		
 		
+		//Customer FindUpdateCustomer = customerDAO.findById(2L);
+		//account.setCustomer(FindUpdateCustomer);
 		
+		accountDAO.update(account);
+		
+		log.info("account (modified) : {} {}", account,
+				System.identityHashCode(account));
+		
+		Account modifiedAccount = accountDAO.findById(account.getId());
+		
+		Assert.assertEquals(modifiedAccount, account);
+		
+		log.info("modifiedAccount : {} {}", modifiedAccount,
+				System.identityHashCode(modifiedAccount));
+		
+		Customer customer = customerDAO.findById(modifiedAccount.getCustomer().getId());
+		
+		Assert.assertEquals(customer.getId(), modifiedAccount.getCustomer().getId());
+		
+		log.info("customer : {} {}", customer, System.identityHashCode(customer));
+		
+	}
+	
+	@Test
+	public void deleteAccountTest() {
+		
+		log.info("deleteAccountTest -------------------");
+		
+		//BUSCAR EL CUSTOMER CON EL ID 3
+		Customer FindCustomer = customerDAO.findById(3L);
+		
+		// CREAR UNA CUENTA NUEVA REFERENCIADA AL CUSTOMER CON ID 3
+		Account accountNew = Account.builder()
+				.accountNumber("00112233445500")
+				.createdDate(new CustomDate())
+				.balance(new BigDecimal("51234567.45"))
+				.build();
+		
+		accountNew.setCustomer(FindCustomer);
+		
+		accountDAO.insert(accountNew);
+		
+		log.info("accountNew : {} {}", accountNew,
+				System.identityHashCode(accountNew));
+
+		log.info("accountNew (detached) : {} {}", accountNew,
+				System.identityHashCode(accountNew));
+		
+		Account account = accountDAO.findById(accountNew.getId());
+		
+		Assert.assertEquals(account, accountNew);
+		
+		log.info("account : {} {}", account,
+				System.identityHashCode(account));
+		
+		accountDAO.delete(account);
+		
+		log.info("account (deleted) : {} {}", account,
+				System.identityHashCode(account));
+		
+		Account deleteAccount = accountDAO.findById(account.getId());
+		
+		Assert.assertNull(deleteAccount);
+		
+
+		log.info("deleteAccount : {} {}", deleteAccount,
+				System.identityHashCode(deleteAccount));
 	}
 
 	@Test

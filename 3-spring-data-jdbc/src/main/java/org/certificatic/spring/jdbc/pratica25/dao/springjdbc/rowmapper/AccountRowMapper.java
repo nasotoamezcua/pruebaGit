@@ -1,5 +1,6 @@
 package org.certificatic.spring.jdbc.pratica25.dao.springjdbc.rowmapper;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -22,9 +23,14 @@ public class AccountRowMapper implements RowMapper<Account> {
 		
 		account.setId(rs.getLong("ACCOUNT_ID"));
 		account.setAccountNumber(rs.getString("ACCOUNT_NUMBER"));
-		account.setCreatedDate(new CustomDate(rs.getDate("CREATED_DATE").getTime()));
-		account.setBalance(rs.getBigDecimal("BALANCE"));
-
+		account.setCreatedDate(new CustomDate(rs.getTimestamp("CREATED_DATE").getTime())); // Regresa la fecha con los segundos
+		// account.setCreatedDate(new CustomDate(rs.getDate("CREATED_DATE").getTime())); // Regresa la fecha sin los segundos
+		// Formatear a dos decimales Forma ideal
+		account.setBalance(rs.getBigDecimal("BALANCE").setScale(2,BigDecimal.ROUND_HALF_EVEN));
+		
+		// Otra forma: Formatear a dos decimales
+		//account.setBalance(account.getBalance().setScale(2,BigDecimal.ROUND_HALF_EVEN));
+		
 		return account;
 	}
 

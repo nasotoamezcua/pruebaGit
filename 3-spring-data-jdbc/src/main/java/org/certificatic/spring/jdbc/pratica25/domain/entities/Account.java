@@ -15,8 +15,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString(exclude = { "customer", "createdDate" , "balance" })
-@EqualsAndHashCode(exclude = { "customer", "createdDate" , "balance" })
+@ToString(exclude = { "customer"})
+@EqualsAndHashCode(exclude = { "customer"})
 public class Account {
 
 	private Long id;
