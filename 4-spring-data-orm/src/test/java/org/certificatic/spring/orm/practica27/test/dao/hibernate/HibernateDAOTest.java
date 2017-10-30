@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 		locations = "classpath:/spring/practica27/orm-hibernate4-application-context.xml")
 @Transactional
 @Rollback(false)
-@ActiveProfiles("h2-in-memory")
+@ActiveProfiles("h2-local")
 public class HibernateDAOTest {
 
 	@Autowired

@@ -3,10 +3,18 @@ package org.certificatic.spring.orm.domain.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -23,7 +31,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 // Habilitar Entidad JPA
-// Habilitar nombre de tabla SPRING_DATA_CUSTOMER_TBL
+@Entity
+// Habilitar nombre de tabla CUSTOMER_TBL
+@Table(name = "CUSTOMER_TBL")
 @ToString(exclude = { "accounts" })
 @EqualsAndHashCode(exclude = { "accounts" })
 public class Customer {
@@ -40,11 +50,14 @@ public class Customer {
 	private String lastName;
 
 	// Anotar mapeo one-to-one Fetch.EAGER y cascade.ALL mapeado por el
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "customer")
 	// atributo customer de la Tabla User
 	private User user;
 
 	// Anotar mapeo one-to-many Fetch.Lazy mapeado por el
 	// atributo customer de la Tabla Account
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
 	// Anotar Cascada sólo para DELETE (cascada de hibernate no de JPA)
+	@Cascade(org.hibernate.annotations.CascadeType.DELETE)
 	private @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) List<Account> accounts = new ArrayList<>();
 }
