@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 public class AddServiceImpl implements IAddService {
 
+	////los Beans de "webbeans" si pueden inyectar Beans de "rootbeans"
 	@Autowired(required = false)
 	private BeanComponent beanComponent;
 

@@ -10,6 +10,7 @@ import lombok.Data;
 @Data
 public class BeanComponent {
 
+	//los Beans de "rootbeans" no pueden inyectar de "webbeans"
 	@Autowired(required = false)
 	private AddServiceImpl addService;
 
